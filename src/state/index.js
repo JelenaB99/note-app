@@ -1,1 +1,2 @@
-export * from './test.atom'
+
+export * from './isModalOpen.atom'

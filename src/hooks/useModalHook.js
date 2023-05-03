@@ -1,4 +1,4 @@
-import { isModalOpenAtom } from "../state/isModalOpen.atom";
+import { isModalOpenAtom } from "../state";
 import { useAtom } from "jotai";
 export function useModalHook(){
  const [isModalOpen, setIsModalOpen]=useAtom(isModalOpenAtom)
