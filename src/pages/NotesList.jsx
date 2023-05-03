@@ -1,11 +1,15 @@
 import { Button } from "@mui/material"
 import AddNoteModal from "../components/AddNoteModal"
 import { useState } from "react"
+
+
 export default function NotesList() {
 const [openModal,setOpenModal]=useState(false);
 
+
 function handleOpen(){
   setOpenModal(true);
+
 }
 
 function handleOnCloseModal(){
