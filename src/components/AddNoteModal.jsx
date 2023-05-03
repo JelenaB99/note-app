@@ -1,5 +1,6 @@
 import { Button, Modal, Typography, Box, TextField, Grid } from "@mui/material";
 import { useState } from "react";
+import { useModalHook } from "../hooks";
 const style = {
   position: "absolute",
   top: "50%",
@@ -12,12 +13,11 @@ const style = {
   p: 4,
 };
 
-export default function AddNoteModal({openModal,onCloseModal}) {
-//   const {openModal,onCloseModal} = props;
+export default function AddNoteModal() {
+  const { closeModal, isModalOpen } = useModalHook();
 
   const [noteTitle, setNoteTitle] = useState("");
   const [noteContent, setNoteContent] = useState("");
-  
 
   function handleTitleChange(e) {
     setNoteTitle(e.target.value);
@@ -27,18 +27,12 @@ export default function AddNoteModal({openModal,onCloseModal}) {
     setNoteContent(e.target.value);
   }
 
-
- 
   return (
     <div>
       <Modal
         aria-labelledby="title"
         aria-describedby="description"
-        open={openModal}
-        o
-
-        
-       
+        open={isModalOpen}
       >
         <Box sx={style}>
           <Grid container direction="column" spacing={2}>
@@ -56,8 +50,7 @@ export default function AddNoteModal({openModal,onCloseModal}) {
                   variant="outlined"
                   value={noteTitle}
                   onChange={handleTitleChange}
-                >
-                </TextField>
+                ></TextField>
 
                 <Grid item>
                   <TextField
@@ -67,23 +60,14 @@ export default function AddNoteModal({openModal,onCloseModal}) {
                     variant="outlined"
                     value={noteContent}
                     onChange={handleContentChange}
-                  >
-                  </TextField>
+                  ></TextField>
                   <Grid item container justifyContent="end" spacing={2}>
-                     <Grid item>
-                     <Button
-                     variant="contained"
-                     >
-                     Create 
-                     </Button>
-                     </Grid>
-                     <Grid item>
-                     <Button 
-                      
-                     onClick={onCloseModal}>
-                     Cancel
-                     </Button>
-                     </Grid>
+                    <Grid item>
+                      <Button variant="contained">Create</Button>
+                    </Grid>
+                    <Grid item>
+                      <Button onClick={closeModal}>Cancel</Button>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
