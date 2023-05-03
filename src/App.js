@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import NotesList from "./components/NotesList";
+import NotesList from "./pages/NotesList";
 function App() {
   return (
   <>
