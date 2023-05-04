@@ -1,2 +1,2 @@
 import {atom} from "jotai"
-export const notes=atom([])
+export const notesAtom=atom([])

@@ -1,6 +1,6 @@
 import { Button, Modal, Typography, Box, TextField, Grid } from "@mui/material";
 import { useState } from "react";
-import { useModalHook } from "../hooks";
+import { useModalHook, useNotesHook } from "../hooks";
 const style = {
   position: "absolute",
   top: "50%",
@@ -15,16 +15,37 @@ const style = {
 
 export default function AddNoteModal() {
   const { closeModal, isModalOpen } = useModalHook();
+  const { createNote, notes } = useNotesHook();
+  const [title, setNoteTitle] = useState("");
+  const [content, setNoteContent] = useState("");
 
-  const [noteTitle, setNoteTitle] = useState("");
-  const [noteContent, setNoteContent] = useState("");
-
+  console.log(notes);
   function handleTitleChange(e) {
     setNoteTitle(e.target.value);
   }
 
   function handleContentChange(e) {
     setNoteContent(e.target.value);
+  }
+
+
+  function resetFields(){
+    setNoteTitle("")
+    setNoteContent("")
+  }
+
+  function handleCreate() {
+    createNote({ title, content });
+    closeModal() 
+    resetFields()
+    
+  }
+
+
+  function handleCancel(){
+    closeModal() 
+    resetFields()
+
   }
 
   return (
@@ -48,7 +69,7 @@ export default function AddNoteModal() {
                   id="Note-Title"
                   label="Note Title"
                   variant="outlined"
-                  value={noteTitle}
+                  value={title}
                   onChange={handleTitleChange}
                 ></TextField>
 
@@ -58,15 +79,17 @@ export default function AddNoteModal() {
                     id="Note-Content"
                     label="Note Content"
                     variant="outlined"
-                    value={noteContent}
+                    value={content}
                     onChange={handleContentChange}
                   ></TextField>
                   <Grid item container justifyContent="end" spacing={2}>
                     <Grid item>
-                      <Button variant="contained">Create</Button>
+                      <Button variant="contained" onClick={handleCreate}>
+                        Create
+                      </Button>
                     </Grid>
                     <Grid item>
-                      <Button onClick={closeModal}>Cancel</Button>
+                      <Button onClick={handleCancel}>Cancel</Button>
                     </Grid>
                   </Grid>
                 </Grid>
