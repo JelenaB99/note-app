@@ -1,10 +1,10 @@
 import { Button } from "@mui/material";
 import AddNoteModal from "../components/AddNoteModal";
-import { useModalHook, useNotesHook } from "../hooks";
+import { useModalHook } from "../hooks";
+import CardContainer from "../components/CardContainer";
 
 export default function NotesList() {
   const { openModal } = useModalHook();
-  const { notes } = useNotesHook();
 
   function handleOpen() {
     openModal();
@@ -13,15 +13,10 @@ export default function NotesList() {
   return (
     <>
       <AddNoteModal />
-      {notes.map((note) => (
-        <div>
-          <p>{note.title}</p>
-          <p>{note.content}</p>
-        </div>
-      ))}
       <Button onClick={handleOpen} variant="outlined">
         Add new Note
       </Button>
+      <CardContainer />
     </>
   );
 }

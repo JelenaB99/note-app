@@ -19,7 +19,7 @@ export default function AddNoteModal() {
   const [title, setNoteTitle] = useState("");
   const [content, setNoteContent] = useState("");
 
-  console.log(notes);
+
   function handleTitleChange(e) {
     setNoteTitle(e.target.value);
   }
