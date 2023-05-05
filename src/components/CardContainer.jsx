@@ -12,11 +12,21 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteConfirmationModal from "./DeleteConfirmationModal";
 import { useState } from "react";
-import { Provider } from "jotai";
+import AddNoteModal from "../components/AddNoteModal";
+import { useModalHook } from "../hooks";
 
 export default function CardContainer() {
-  const { notes } = useNotesHook();
+  const { notes, deleteNote,editNote } = useNotesHook();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const { openModal } = useModalHook();
+
+  function handleDeleteNote(id) {
+    deleteNote(id);
+  }
+  
+ function handleEditNote(id){
+  editNote(id)
+ }
 
   function handleOpenDeleteModal() {
     setOpenDeleteModal(true);
@@ -24,38 +34,44 @@ export default function CardContainer() {
   function onClose() {
     setOpenDeleteModal(false);
   }
+  function handleOpen() {
+    openModal();
+  }
+
   return (
     <>
+      <AddNoteModal />
+
       {notes.map((note) => (
-        <>
-          <Grid padding={3}>
-            <Card
-              sx={{
-                maxWidth: 345,
-              }}
-            >
-              <CardHeader title={note.title} />
-              <CardContent>
-                <Typography paragraph>{note.content}</Typography>
-              </CardContent>
-              <CardActions disableSpacing>
-                <IconButton onClick={handleOpenDeleteModal} aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-                <IconButton>
-                  <EditIcon />
-                </IconButton>
-              </CardActions>
-            </Card>
-            <Provider>
-              <DeleteConfirmationModal
-                openModal={openDeleteModal}
-                onClose={onClose}
-                itemTitle={note.title}
-              />
-            </Provider>
-          </Grid>
-        </>
+        <Grid padding={3} key={note.id}>
+          <Card
+            sx={{
+              maxWidth: 345,
+            }}
+          >
+            <CardHeader title={note.title} />
+            <CardContent>
+              <Typography paragraph>{note.content}</Typography>
+            </CardContent>
+            <CardActions disableSpacing>
+              <IconButton
+                onClick={() => handleDeleteNote(note.id)}
+                aria-label="delete"
+              >
+                <DeleteIcon />
+              </IconButton>
+              <IconButton onClick={()=>handleEditNote(note.id)} >
+                <EditIcon />
+              </IconButton>
+            </CardActions>
+          </Card>
+
+          <DeleteConfirmationModal
+            openModal={openDeleteModal}
+            onClose={onClose}
+            title={note.title}
+          />
+        </Grid>
       ))}
     </>
   );

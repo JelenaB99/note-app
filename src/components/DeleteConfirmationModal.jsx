@@ -1,4 +1,6 @@
 import { Button, Modal, Typography, Box, Grid } from "@mui/material";
+import { useNotesHook } from "../hooks";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -11,14 +13,20 @@ const style = {
   p: 4,
 };
 
-export default function DeleteConfirmationModal(props) {
-  const { onClose, openModal, itemTitle } = props;
+export default function DeleteConfirmationModal(props,) {
+  const { onClose, openModal, title } = props;
+  const { deleteNote } = useNotesHook();
+
+  function handleDeleteNote(id) {
+    deleteNote(id);
+  }
+
   return (
     <>
       <Modal
         open={openModal}
         onClose={onClose}
-        itemTitle={itemTitle}
+        title={title}
         aria-labelledby="confirm-modal-title"
         aria-describedby="confirm-modal-description"
       >
@@ -26,13 +34,17 @@ export default function DeleteConfirmationModal(props) {
           <Grid container direction="column">
             <Grid item>
               <Typography id="confirm-modal-title" variant="h6" component="h2">
-                Are you sure you want to delete this {itemTitle}?
+                Are you sure you want to delete this {title}?
               </Typography>
             </Grid>
 
             <Grid item container justifyContent="end">
               <Button onClick={onClose}>No</Button>
-              <Button color="secondary" variant="contained">
+              <Button
+                color="secondary"
+                variant="contained"
+                onClick={()=>handleDeleteNote()}
+              >
                 Yes
               </Button>
             </Grid>
