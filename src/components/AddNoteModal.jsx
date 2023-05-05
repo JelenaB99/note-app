@@ -19,7 +19,6 @@ export default function AddNoteModal() {
   const [title, setNoteTitle] = useState("");
   const [content, setNoteContent] = useState("");
 
-
   function handleTitleChange(e) {
     setNoteTitle(e.target.value);
   }
@@ -28,24 +27,20 @@ export default function AddNoteModal() {
     setNoteContent(e.target.value);
   }
 
-
-  function resetFields(){
-    setNoteTitle("")
-    setNoteContent("")
+  function resetFields() {
+    setNoteTitle("");
+    setNoteContent("");
   }
 
   function handleCreate() {
     createNote({ title, content });
-    closeModal() 
-    resetFields()
-    
+    closeModal();
+    resetFields();
   }
 
-
-  function handleCancel(){
-    closeModal() 
-    resetFields()
-
+  function handleCancel() {
+    closeModal();
+    resetFields();
   }
 
   return (
@@ -71,6 +66,8 @@ export default function AddNoteModal() {
                   variant="outlined"
                   value={title}
                   onChange={handleTitleChange}
+                  color="secondary"
+                  
                 ></TextField>
 
                 <Grid item>
@@ -81,10 +78,15 @@ export default function AddNoteModal() {
                     variant="outlined"
                     value={content}
                     onChange={handleContentChange}
+                    color="secondary"
                   ></TextField>
                   <Grid item container justifyContent="end" spacing={2}>
                     <Grid item>
-                      <Button variant="contained" onClick={handleCreate}>
+                      <Button
+                        color="secondary"
+                        variant="contained"
+                        onClick={handleCreate}
+                      >
                         Create
                       </Button>
                     </Grid>

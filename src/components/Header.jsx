@@ -5,10 +5,11 @@ import Typography from "@mui/material/Typography";
 
 export default function Header() {
   return (
-    <Box  sx={{flexGrow: 1}}>
-      <AppBar position="static" variant="secondary">
+    <Box sx={{ flexGrow: 2, border: "2px" }}>
+      <AppBar position="static" variant="primary" color="secondary" >
         <Toolbar>
-          <Typography variant="h5" component="div" sx={{ flexGrow: 1}}>
+          <Typography 
+          variant="h3" component="div" sx={{ flexGrow: 1 }}>
             Notes
           </Typography>
         </Toolbar>

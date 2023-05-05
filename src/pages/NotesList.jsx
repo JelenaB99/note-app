@@ -1,8 +1,8 @@
-import { Button } from "@mui/material";
+import { IconButton } from "@mui/material";
 import AddNoteModal from "../components/AddNoteModal";
 import { useModalHook } from "../hooks";
 import CardContainer from "../components/CardContainer";
-
+import AddIcon from "@mui/icons-material/Add";
 export default function NotesList() {
   const { openModal } = useModalHook();
 
@@ -13,10 +13,10 @@ export default function NotesList() {
   return (
     <>
       <AddNoteModal />
-      <Button onClick={handleOpen} variant="outlined">
-        Add new Note
-      </Button>
-      <CardContainer />
+      <IconButton onClick={handleOpen}>
+        <AddIcon color="secondary" fontSize="large" />
+       </IconButton>
+       <CardContainer />
     </>
   );
 }
