@@ -1,18 +1,11 @@
 import { notesAtom } from "../state";
 import { useAtom } from "jotai";
-
-let key = 0;
-
-const generateId = () => {
-  const k = key;
-  key++;
-  return k;
-};
+import { v4 } from "uuid";
 
 export function useNotesHook() {
   const [notes, setNotes] = useAtom(notesAtom);
   function createNote(note) {
-    setNotes((notes) => [...notes, { ...note, id: generateId() }]);
+    setNotes((notes) => [...notes, { ...note, id: v4() }]);
   }
   function deleteNote(id) {
     const newNotes = notes.filter((note) => note.id !== id);
