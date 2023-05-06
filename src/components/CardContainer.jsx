@@ -16,17 +16,17 @@ import AddNoteModal from "../components/AddNoteModal";
 import { useModalHook } from "../hooks";
 
 export default function CardContainer() {
-  const { notes, deleteNote,editNote } = useNotesHook();
+  const { notes, deleteNote, editNote } = useNotesHook();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { openModal } = useModalHook();
 
   function handleDeleteNote(id) {
     deleteNote(id);
   }
-  
- function handleEditNote(id){
-  editNote(id)
- }
+
+  function handleEditNote(id) {
+    editNote(id, "jelena", "content");
+  }
 
   function handleOpenDeleteModal() {
     setOpenDeleteModal(true);
@@ -60,7 +60,7 @@ export default function CardContainer() {
               >
                 <DeleteIcon />
               </IconButton>
-              <IconButton onClick={()=>handleEditNote(note.id)} >
+              <IconButton onClick={() => handleEditNote(note.id)}>
                 <EditIcon />
               </IconButton>
             </CardActions>

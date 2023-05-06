@@ -1,4 +1,6 @@
-import {atom} from "jotai"
-import { atomWithStorage } from 'jotai/utils'
+import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 
-export const notesAtom=atom([])
+export const notesAtom = atom([
+  { title: "title", content: "content", id: 88888 },
+]);

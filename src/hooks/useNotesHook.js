@@ -19,9 +19,14 @@ export function useNotesHook() {
     setNotes(newNotes);
   }
 
-  function editNote(id) {
-  
-     
+  function editNote(id, title, content) {
+    setNotes(function (notes) {
+      const newNotes = notes.map((note) => {
+        if (note.id !== id) return note;
+        return { ...note, title: title, content: content };
+      });
+      return newNotes;
+    });
   }
 
   return {
