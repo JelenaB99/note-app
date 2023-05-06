@@ -1,6 +1,7 @@
 import { Button, Modal, Typography, Box, TextField, Grid } from "@mui/material";
+import { useNotesHook } from "../hooks";
 import { useState } from "react";
-import { useModalHook, useNotesHook } from "../hooks";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -12,52 +13,36 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
-export default function AddNoteModal() {
-  const { closeModal, isModalOpen } = useModalHook();
-  const { createNote } = useNotesHook();
-  const [title, setNoteTitle] = useState("");
-  const [content, setNoteContent] = useState("");
+export default function EditModal(props) {
+  const { openModal, onClose, note } = props;
+  const { editNote } = useNotesHook();
+  const [title, setTitle] = useState(note.title);
+  const [content, setContent] = useState(note.content);
 
   function handleTitleChange(e) {
-    setNoteTitle(e.target.value);
+    setTitle(e.target.value);
   }
-
   function handleContentChange(e) {
-    setNoteContent(e.target.value);
+    setContent(e.target.value);
   }
-
-  function resetFields() {
-    setNoteTitle("");
-    setNoteContent("");
-  }
-  const isValid = Boolean(title || content);
-
-  function handleCreate() {
-    if (!isValid) return;
-
-    createNote({ title, content });
-    closeModal();
-    resetFields();
-  }
-
-  function handleCancel() {
-    closeModal();
-    resetFields();
+  function handleEditNote() {
+    editNote(note.id, title, content);
+    onClose();
   }
 
   return (
-    <div>
+    <>
       <Modal
         aria-labelledby="title"
         aria-describedby="description"
-        open={isModalOpen}
+        open={openModal}
+        onClose={onClose}
       >
         <Box sx={style}>
           <Grid container direction="column" spacing={2}>
             <Grid item>
               <Typography id="add-modal-titel" variant="h6" component="h2">
-                Add new Note
+                Edit this note
               </Typography>
             </Grid>
             <Grid container direction="column" spacing={2}>
@@ -67,9 +52,9 @@ export default function AddNoteModal() {
                   id="Note-Title"
                   label="Note Title"
                   variant="outlined"
+                  color="secondary"
                   value={title}
                   onChange={handleTitleChange}
-                  color="secondary"
                 ></TextField>
 
                 <Grid item>
@@ -78,22 +63,22 @@ export default function AddNoteModal() {
                     id="Note-Content"
                     label="Note Content"
                     variant="outlined"
+                    color="secondary"
                     value={content}
                     onChange={handleContentChange}
-                    color="secondary"
                   ></TextField>
                   <Grid item container justifyContent="end" spacing={2}>
                     <Grid item>
                       <Button
+                        onClick={handleEditNote}
                         color="secondary"
                         variant="contained"
-                        onClick={handleCreate}
                       >
                         Create
                       </Button>
                     </Grid>
                     <Grid item>
-                      <Button onClick={handleCancel}>Cancel</Button>
+                      <Button onClick={onClose}>Cancel</Button>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -102,6 +87,6 @@ export default function AddNoteModal() {
           </Grid>
         </Box>
       </Modal>
-    </div>
+    </>
   );
 }
