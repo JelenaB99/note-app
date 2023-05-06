@@ -6,10 +6,21 @@ import Typography from "@mui/material/Typography";
 export default function Header() {
   return (
     <Box sx={{ flexGrow: 2, border: "2px" }}>
-      <AppBar position="static" variant="primary" color="secondary" >
+      <AppBar
+        position="static"
+        variant="primary"
+        color="secondary"
+        sx={{ border: 3 }}
+      >
         <Toolbar>
-          <Typography 
-          variant="h3" component="div" sx={{ flexGrow: 1 }}>
+          <Typography
+            variant="h3"
+            component="div"
+            sx={{
+              fontFamily: "serif",
+              flexGrow: 1,
+            }}
+          >
             Notes
           </Typography>
         </Toolbar>

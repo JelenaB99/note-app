@@ -22,8 +22,6 @@ export default function CardNote({ note }) {
     deleteNote(note.id);
   }
 
- 
-
   function handleOpenDeleteModal() {
     setOpenDeleteModal(true);
   }
@@ -45,7 +43,7 @@ export default function CardNote({ note }) {
           border: 1,
         }}
       >
-        <CardHeader title={note.title} />
+        <CardHeader sx={{ borderBottom: 1 }} title={note.title} />
         <CardContent>
           <Typography paragraph>{note.content}</Typography>
         </CardContent>

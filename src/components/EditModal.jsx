@@ -74,7 +74,7 @@ export default function EditModal(props) {
                         color="secondary"
                         variant="contained"
                       >
-                        Create
+                        Edit
                       </Button>
                     </Grid>
                     <Grid item>
