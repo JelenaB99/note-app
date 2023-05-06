@@ -13,14 +13,11 @@ const style = {
   p: 4,
 };
 
-export default function DeleteConfirmationModal(props,) {
-  const { onClose, openModal, title } = props;
-  const { deleteNote } = useNotesHook();
-
-  function handleDeleteNote(id) {
-    deleteNote(id);
-  }
-
+export default function DeleteConfirmationModal(props) {
+  const { onClose, openModal, title, onConfirm } = props;
+ 
+   
+ 
   return (
     <>
       <Modal
@@ -43,7 +40,7 @@ export default function DeleteConfirmationModal(props,) {
               <Button
                 color="secondary"
                 variant="contained"
-                onClick={()=>handleDeleteNote()}
+                onClick={onConfirm}
               >
                 Yes
               </Button>
